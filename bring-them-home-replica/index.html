@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bring Them Home — Nobody Gets Left Behind</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="scanlines"></div>
+
+    <header class="topbar">
+      <div class="brand-mini" onclick="showScreen('home')">BTH<span>//</span></div>
+      <div class="status"><span class="dot"></span> OPERATIONAL</div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="toggleSound()" id="soundBtn">🔊</button>
+        <button class="icon-btn" onclick="showScreen('settings')">⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HOME -->
+      <section class="screen active" id="home">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">🇳🇬 TODAY'S RESCUE OPERATION 033</div>
+            <h1>BRING<br><span>THEM</span><br>HOME</h1>
+            <p class="tagline">Nobody gets left behind.</p>
+            <p class="mission-note">033 Kachiri Highway · Clear morning</p>
+            <div class="hero-actions">
+              <button class="primary" onclick="showScreen('callsign')">PLAY ▸</button>
+              <button class="secondary" onclick="showScreen('training')">TRAINING</button>
+            </div>
+          </div>
+          <div class="hero-panel">
+            <div class="panel-kicker">ONE OFFICIAL ATTEMPT</div>
+            <div class="map-art">
+              <div class="map-road"></div>
+              <div class="map-grid"></div>
+              <div class="map-pin pin-a">A</div>
+              <div class="map-pin pin-b">LZ</div>
+              <div class="map-route"></div>
+              <div class="map-label">KACHIRI<br>HIGHWAY</div>
+            </div>
+            <div class="mission-stats">
+              <div><b>8</b><span>PASSENGERS</span></div>
+              <div><b>06:00</b><span>EXTRACTION</span></div>
+              <div><b>∞</b><span>LIVES MATTER</span></div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="menu-grid">
+          <button onclick="showScreen('operations')">QUICK RESCUE <small>01</small></button>
+          <button onclick="showScreen('training')">TRAINING <small>02</small></button>
+          <button onclick="showScreen('operator')">OPERATOR <small>03</small></button>
+          <button onclick="showScreen('unit')">UNIT <small>04</small></button>
+          <button onclick="showScreen('season')">SEASON PASS <small>05</small></button>
+          <button onclick="showScreen('store')">STORE <small>06</small></button>
+          <button onclick="showScreen('leaderboard')">LEADERBOARD <small>07</small></button>
+          <button onclick="showScreen('profile')">PROFILE <small>08</small></button>
+          <button onclick="showScreen('howto')">HOW TO PLAY <small>09</small></button>
+          <button onclick="showScreen('settings')">SETTINGS <small>10</small></button>
+        </nav>
+        <footer>A fictional story inspired by real courage. All places, people and groups are invented.</footer>
+      </section>
+
+      <!-- CALLSIGN -->
+      <section class="screen modal-screen" id="callsign">
+        <div class="card callsign-card">
+          <div class="eyebrow">BEFORE YOU DEPLOY</div>
+          <h2>WHAT'S YOUR<br><span>CALLSIGN?</span></h2>
+          <p>It goes on the leaderboards, your challenges and your unit. You can change it any time in Settings.</p>
+          <input id="callsignInput" maxlength="16" placeholder="e.g. Dami" autocomplete="off">
+          <label>REPRESENTING <select id="stateSelect">
+            <option>Kofa State</option><option>Lagos</option><option>Abuja FCT</option>
+            <option>Ogun State</option><option>Kaduna State</option><option>Rivers State</option>
+          </select></label>
+          <div class="row">
+            <button class="secondary" onclick="randomCallsign()">🎲 PICK ONE FOR ME</button>
+            <button class="primary" onclick="saveCallsign()">DEPLOY ▸</button>
+          </div>
+          <button class="back-link" onclick="showScreen('home')">← BACK</button>
+        </div>
+      </section>
+
+      <!-- OPERATIONS -->
+      <section class="screen" id="operations">
+        <div class="section-head">
+          <div><div class="eyebrow">QUICK RESCUE · CHOOSE YOUR OPERATION</div><h2>WHERE ARE YOU GOING?</h2></div>
+          <button class="secondary" onclick="showScreen('home')">BACK</button>
+        </div>
+        <div class="mission-type">
+          <button class="mission-type-btn selected">RESCUE</button>
+          <button class="mission-type-btn">HOLD THE LZ</button>
+          <button class="mission-type-btn">ESCORT VIP</button>
+        </div>
+        <div class="hostages">
+          <span>HOSTAGES</span><button class="count selected">8</button><button class="count">10</button><button class="count">12</button><button class="count">15</button>
+          <small>More hostages = a longer window, more to escort, some held at the second site.</small>
+        </div>
+        <div class="operation-grid">
+          <article class="operation selected">
+            <div class="op-image road"><span>KOFA STATE · KACHIRI HIGHWAY</span></div>
+            <h3>OPERATION ROADBLOCK</h3>
+            <p>A bus abandoned on the highway, passengers missing. Open savannah, a zinc-walled compound, a getaway truck.</p>
+            <button class="primary" onclick="openMission('ROADBLOCK')">DEPLOY ▸</button>
+          </article>
+          <article class="operation">
+            <div class="op-image forest"><span>KOFA STATE · IROKO FOREST</span></div>
+            <h3>OPERATION IROKO</h3>
+            <p>Farmers taken from their fields at dawn. Dense rainforest, a river crossing, a camp behind a stake fence.</p>
+            <button class="primary" onclick="openMission('IROKO')">DEPLOY ▸</button>
+          </article>
+          <article class="operation">
+            <div class="op-image water"><span>KOFA STATE · NEW KORO CREEK</span></div>
+            <h3>OPERATION TIDEWATER</h3>
+            <p>A passenger boat hijacked at dusk. Stilt houses, mangroves, an island camp ringed by water.</p>
+            <button class="primary" onclick="openMission('TIDEWATER')">DEPLOY ▸</button>
+          </article>
+        </div>
+      </section>
+
+      <!-- MISSION BRIEF -->
+      <section class="screen modal-screen" id="brief">
+        <div class="card brief-card">
+          <div class="eyebrow" id="briefMeta">06:14 · KACHIRI HIGHWAY · KOFA STATE</div>
+          <h2>OPERATION <span id="briefName">ROADBLOCK</span></h2>
+          <div class="tags"><span>RESCUE</span><span>CLEAR MORNING</span><span>PRACTICE SEED</span></div>
+          <p class="lead">A passenger bus has disappeared on a rural stretch of the Kachiri Highway. It’s been found abandoned — doors open, luggage everywhere. Eight passengers are missing.</p>
+          <p>Find them. Free them. Protect them. Get everyone to Eagle Two before the extraction window closes.</p>
+          <div class="brief-stats"><div><b>8</b> Passengers</div><div><b>BLACK JACKAL</b> Kidnapping network</div><div><b>06:00</b> Extraction window</div></div>
+          <div class="warning">Lives saved matter more than enemies defeated. Hit a civilian and the mission ends.</div>
+          <div class="loadout"><div><b>OPERATOR</b><span id="operatorName">RECRUIT</span></div><div><b>PRIMARY</b><span>AR-9 CARBINE + P-9 SUPPRESSED</span></div><div><b>GADGETS</b><span>Pick 2</span></div></div>
+          <button class="primary wide" onclick="startMission()">DEPLOY ▸</button>
+          <button class="back-link" onclick="showScreen('operations')">← BACK</button>
+        </div>
+      </section>
+
+      <!-- GAME -->
+      <section class="screen game-screen" id="game">
+        <div class="hud-top">
+          <div><span class="hud-label">CIVILIANS SAFE</span><strong id="saved">0 / 8</strong></div>
+          <div class="timer">EXTRACTION <strong id="timer">06:00</strong></div>
+          <div><button class="hud-btn" onclick="pauseGame()">Ⅱ</button><button class="hud-btn" onclick="toggleSound()">🔊</button></div>
+        </div>
+        <div class="game-world" id="gameWorld">
+          <div class="sun"></div>
+          <div class="terrain t1"></div><div class="terrain t2"></div><div class="terrain t3"></div>
+          <div class="compound"><div class="roof"></div><div class="wall"></div><div class="door"></div></div>
+          <div class="truck"></div>
+          <div class="water-tank"></div>
+          <div class="player" id="player"><div class="player-body"></div><div class="player-gun"></div></div>
+          <div class="civilian c1" data-id="1">●</div><div class="civilian c2" data-id="2">●</div>
+          <div class="civilian c3" data-id="3">●</div><div class="civilian c4" data-id="4">●</div>
+          <div class="civilian c5" data-id="5">●</div><div class="civilian c6" data-id="6">●</div>
+          <div class="civilian c7" data-id="7">●</div><div class="civilian c8" data-id="8">●</div>
+          <div class="hostile h1">▲</div><div class="hostile h2">▲</div><div class="hostile h3">▲</div>
+          <div class="objective-marker">◎ <span>OBJECTIVE</span></div>
+          <div class="lz">EAGLE TWO<br><small>EXTRACTION</small></div>
+          <div class="toast" id="gameToast">Find the missing passengers.</div>
+        </div>
+        <div class="hud-bottom">
+          <div class="stat"><span>ARMOR</span><div class="bar"><i id="armorBar"></i></div></div>
+          <div class="stat"><span>HEALTH</span><div class="bar"><i id="healthBar"></i></div></div>
+          <div class="stat"><span>STAMINA</span><div class="bar"><i id="staminaBar"></i></div></div>
+          <div class="weapon"><b>AR-9 CARBINE</b><span>30 / 150</span></div>
+          <button class="map-btn" onclick="toggleMap()">MAP</button>
+        </div>
+        <div class="touch-controls"><button onpointerdown="movePlayer('left')">◀</button><button onpointerdown="movePlayer('down')">▼</button><button onpointerdown="movePlayer('up')">▲</button><button onpointerdown="movePlayer('right')">▶</button><button class="fire" onclick="fire()">FIRE</button></div>
+      </section>
+
+      <!-- MAP -->
+      <div class="overlay" id="mapOverlay">
+        <div class="tactical-map">
+          <button class="close" onclick="toggleMap()">✕</button>
+          <div class="eyebrow">TACTICAL MAP</div><h2>KACHIRI HIGHWAY</h2>
+          <div class="big-map"><span class="map-you">YOU</span><span class="map-objective">◎</span><span class="map-lz">LZ</span><span class="map-captive c1m">1</span><span class="map-captive c2m">2</span><span class="map-captive c3m">3</span><span class="map-captive c4m">4</span></div>
+          <p>Objective · Captive · Hostile · LZ</p>
+        </div>
+      </div>
+
+      <!-- PAUSE -->
+      <div class="overlay" id="pauseOverlay">
+        <div class="card pause-card"><div class="eyebrow">OPERATION ROADBLOCK · KACHIRI HIGHWAY</div><h2>PAUSED</h2>
+          <button class="primary wide" onclick="resumeGame()">RESUME</button><button class="secondary wide" onclick="restartMission()">RESTART MISSION</button><button class="secondary wide" onclick="showScreen('settings'); closeOverlay('pauseOverlay')">SETTINGS</button><button class="back-link" onclick="showScreen('home'); closeOverlay('pauseOverlay')">QUIT TO MENU</button>
+        </div>
+      </div>
+
+      <!-- HOW TO -->
+      <section class="screen" id="howto">
+        <div class="section-head"><div><div class="eyebrow">FIELD MANUAL</div><h2>HOW TO PLAY</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div>
+        <div class="manual-grid">
+          <div class="card"><h3>KEYBOARD + MOUSE</h3><p><kbd>W A S D</kbd> Move · <kbd>Mouse</kbd> Look · <kbd>Click</kbd> Fire · <kbd>Shift</kbd> Sprint · <kbd>Space</kbd> Jump</p><p><kbd>R</kbd> Reload · <kbd>Q</kbd> Suppressed pistol · <kbd>E</kbd> Free captive / interact · <kbd>M</kbd> Tactical map</p></div>
+          <div class="card"><h3>THE RESCUE</h3><p>Locate all 8. Follow trail clues, check doorways, and clear rooms carefully. The lookout can trigger an alarm.</p><p>Escort limit: Scout 3 · Operator 5 · Guardian 8. Send extra people to EXTRACT or WAIT in cover.</p></div>
+          <div class="card"><h3>SURVIVE</h3><p>Health regenerates out of fire. Armor soaks damage. Supply crates restock ammo and plates. Bushes and smoke hide you.</p><p>When the extraction clock hits zero, Eagle Two leaves — with whoever made it.</p></div>
+        </div>
+        <button class="primary" onclick="startTraining()">START TRAINING (2 MIN)</button>
+      </section>
+
+      <!-- TRAINING -->
+      <section class="screen modal-screen" id="training">
+        <div class="card training-card"><div class="eyebrow">TRAINING RANGE</div><h2>MOVE QUIET.<br><span>BRING THEM HOME.</span></h2>
+          <div class="training-demo"><div class="crosshair">+</div><div class="dummy"></div><div class="instruction" id="trainingText">Use WASD or the arrows to move.</div></div>
+          <div class="training-steps"><span class="active">01</span><span>02</span><span>03</span><span>04</span></div>
+          <button class="primary" onclick="trainingNext()">CONTINUE ▸</button><button class="back-link" onclick="showScreen('home')">← EXIT TRAINING</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="screen" id="settings">
+        <div class="section-head"><div><div class="eyebrow">SYSTEM</div><h2>SETTINGS</h2></div><button class="secondary" onclick="showScreen('home')">DONE</button></div>
+        <div class="settings-grid card">
+          <label>CALLSIGN<input id="settingsCallsign" placeholder="e.g. Dami"></label>
+          <label>LOOK SENSITIVITY<input type="range" min="1" max="100" value="60"></label>
+          <label>MUSIC VOLUME<input type="range" min="0" max="100" value="65"></label>
+          <label>EFFECTS VOLUME<input type="range" min="0" max="100" value="80"></label>
+          <label>ON-SCREEN CONTROLS<select><option>Auto</option><option>Always</option><option>Off</option></select></label>
+          <label>AIM ASSIST (TOUCH)<input type="checkbox" checked></label>
+          <label>AUTO-FIRE ON HOSTILES<input type="checkbox"></label>
+          <label>VIBRATION<input type="checkbox" checked></label>
+          <label>ROUTE GUIDE<input type="checkbox" checked></label>
+          <label>GRAPHICS<select><option>High</option><option>Medium</option><option>Low</option></select></label>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="screen" id="profile">
+        <div class="section-head"><div><div class="eyebrow">YOUR OPERATOR PROFILE</div><h2 id="profileTitle">RECRUIT</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div>
+        <div class="profile-layout"><div class="operator-portrait"><div class="helmet"></div><div class="portrait-body"></div><span>DRAG TO TURN</span></div>
+          <div class="card"><div class="eyebrow">ACHIEVEMENTS</div><div class="achievement"><b>FIRST LIGHT</b><span>Complete your first rescue.</span><i>LOCKED</i></div><div class="achievement"><b>NO ONE LEFT</b><span>Bring every civilian home.</span><i>LOCKED</i></div><div class="achievement"><b>QUIET PROFESSIONAL</b><span>Complete a mission without raising the alarm.</span><i>LOCKED</i></div><button class="primary" onclick="alert('Share card prepared.')">SHARE MY OPERATOR</button></div>
+        </div>
+      </section>
+
+      <!-- OPERATOR -->
+      <section class="screen" id="operator">
+        <div class="section-head"><div><div class="eyebrow">OPERATOR LOBBY</div><h2>SUIT UP</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div>
+        <div class="tabs"><button class="selected">CLASS</button><button>PRIMARY</button><button>SKINS</button><button>GADGETS</button><button>LOOK</button></div>
+        <div class="loadout-grid"><div class="card"><div class="eyebrow">CLASS</div><h3>OPERATOR</h3><p>Balanced extraction specialist. Escort limit: 5.</p><button class="primary">EQUIPPED</button></div><div class="card"><div class="eyebrow">PRIMARY</div><h3>AR-9 CARBINE</h3><p>Reliable mid-range rifle. 30-round magazine.</p><button class="secondary">EQUIPPED</button></div><div class="card"><div class="eyebrow">GADGET</div><h3>SMOKE</h3><p>Break line of sight and move civilians safely.</p><button class="secondary">EQUIP</button></div></div>
+      </section>
+
+      <!-- LEADERBOARD -->
+      <section class="screen" id="leaderboard">
+        <div class="section-head"><div><div class="eyebrow">RANKED BY PEOPLE BROUGHT HOME · THEN KILLS</div><h2>LEADERBOARD</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div>
+        <div class="tabs"><button class="selected">TODAY</button><button>THIS WEEK</button><button>STATES</button><button>UNITS</button><button>RANSOM</button><button>ALL-TIME</button></div>
+        <div class="leaderboard card"><div class="lb-row head"><span>#</span><span>OPERATOR</span><span>HOME</span><span>SCORE</span></div><div class="lb-row"><b>01</b><strong>GhostKola</strong><span>48</span><span>12,840</span></div><div class="lb-row"><b>02</b><strong>QuietOne</strong><span>44</span><span>11,960</span></div><div class="lb-row"><b>03</b><strong>RiverSix</strong><span>41</span><span>10,420</span></div><div class="lb-row mine"><b>--</b><strong id="lbName">YOU</strong><span id="lbHome">0</span><span>0</span></div></div>
+      </section>
+
+      <!-- UNIT / STORE / SEASON -->
+      <section class="screen" id="unit"><div class="section-head"><div><div class="eyebrow">UNIT</div><h2>YOUR UNIT</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div><div class="empty-card card"><div class="unit-symbol">◈</div><h3>NO UNIT ASSIGNED</h3><p>Complete your first rescue to unlock unit challenges and cooperative operations.</p><button class="primary" onclick="showScreen('operations')">FIND AN OPERATION</button></div></section>
+      <section class="screen" id="season"><div class="section-head"><div><div class="eyebrow">SEASON 01</div><h2>SEASON PASS</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div><div class="pass card"><div><span>PROGRESS</span><strong>LEVEL 01</strong></div><div class="progress"><i style="width:12%"></i></div><div class="rewards"><span>01<br>PATCH</span><span>05<br>SKIN</span><span>10<br>LOADOUT</span><span>20<br>CALLSIGN</span></div></div></section>
+      <section class="screen" id="store"><div class="section-head"><div><div class="eyebrow">OPERATOR STORE</div><h2>STORE</h2></div><button class="secondary" onclick="showScreen('home')">BACK</button></div><div class="store-grid"><div class="card item"><div class="item-art skin1"></div><h3>KACHIRI DUST</h3><p>Operator skin</p><button class="secondary">1,200 CREDITS</button></div><div class="card item"><div class="item-art skin2"></div><h3>BLACK JACKAL</h3><p>Weapon finish</p><button class="secondary">900 CREDITS</button></div><div class="card item"><div class="item-art skin3"></div><h3>EAGLE TWO</h3><p>Emblem</p><button class="secondary">600 CREDITS</button></div></div></section>
+
+      <!-- MISSION COMPLETE -->
+      <section class="screen modal-screen" id="complete">
+        <div class="card complete-card"><div class="eyebrow">OPERATION ROADBLOCK · KACHIRI HIGHWAY</div><div class="success">✓</div><h2>MISSION<br><span>COMPLETE</span></h2><div class="home-score"><b id="finalSaved">8 / 8</b><span>HOME 🇳🇬</span></div><div class="result-stats"><div>TIME<strong id="finalTime">00:00</strong></div><div>SCORE<strong id="finalScore">8,420</strong></div><div>RANK<strong>ROOKIE</strong></div></div><div class="score-breakdown">Lives saved matter more than enemies defeated.</div><div class="row"><button class="secondary" onclick="alert('Challenge link copied.')">CHALLENGE A FRIEND</button><button class="secondary" onclick="alert('Result shared.')">SHARE RESULT</button></div><div class="row"><button class="primary" onclick="restartMission()">PLAY AGAIN</button><button class="secondary" onclick="showScreen('home')">MENU</button></div></div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
